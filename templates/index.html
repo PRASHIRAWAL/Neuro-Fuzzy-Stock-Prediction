@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuro-Fuzzy AI Engine</title>
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/landing.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo-text">Neuro</span><span class="logo-highlight">Fuzzy</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#concepts">Concepts</a>
+            <a href="#architecture">Architecture</a>
+        </div>
+        <a href="/analyzer" class="btn-nav">Launch Analyzer</a>
+    </nav>
+
+    <!-- Dynamic Background -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="landing-hero container">
+        <div class="hero-content">
+            <div class="badge-pill">AI-Powered Risk Analysis</div>
+            <h1>The Future of <br><span>Market Intelligence</span></h1>
+            <p>Our hybrid intelligent system combines the pattern recognition power of deep neural networks with the transparent reasoning of fuzzy logic to predict stock market risk with unprecedented clarity.</p>
+            <div class="hero-actions">
+                <a href="/analyzer" class="btn-predict" style="display:inline-block; max-width: 250px; text-decoration:none;">
+                    <span class="btn-text">Start Analyzing</span>
+                </a>
+                <a href="#architecture" class="btn-secondary">View Architecture</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="image-glass-wrapper">
+                <img src="/static/img/concept.png" alt="Neuro-Fuzzy AI Concept" class="floating-img">
+            </div>
+        </div>
+    </header>
+
+    <!-- Soft Computing Section -->
+    <section id="soft-computing" class="container section">
+        <div class="section-header">
+            <h2>Powered by <span>Soft Computing</span></h2>
+        </div>
+        <div class="soft-computing-grid">
+            <div class="sc-card card-green">
+                <div class="icon-box-small">🧠</div>
+                <h3>Neural Network</h3>
+                <p>MLP architecture learns complex market patterns from historical data</p>
+            </div>
+            <div class="sc-card card-purple">
+                <div class="icon-box-small">📚</div>
+                <h3>Fuzzy Logic</h3>
+                <p>Mamdani inference with 27 rules handles uncertainty in market signals</p>
+            </div>
+            <div class="sc-card card-blue">
+                <div class="icon-box-small">🛡️</div>
+                <h3>Risk Scoring</h3>
+                <p>Combined neuro-fuzzy output produces confidence-weighted risk scores</p>
+            </div>
+            <div class="sc-card card-yellow">
+                <div class="icon-box-small">📊</div>
+                <h3>Visual Analytics</h3>
+                <p>Interactive charts, membership functions, and trend visualizations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="container section alt-section">
+        <div class="section-header">
+            <h2>How It Works</h2>
+        </div>
+        <div class="how-it-works-list">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-text">
+                    <h3>Input Market Data</h3>
+                    <p>Set volatility, trend direction, and trading volume</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-text">
+                    <h3>Neuro-Fuzzy Processing</h3>
+                    <p>Neural network learns patterns while fuzzy logic reasons under uncertainty</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-text">
+                    <h3>Risk Assessment</h3>
+                    <p>Get a combined risk score with confidence level and explainable reasoning</p>
+                </div>
+            </div>
+        </div>
+        <div class="action-center">
+            <a href="/analyzer" class="btn-primary-glow">Get Started Free &rarr;</a>
+        </div>
+    </section>
+
+    <!-- Technical Deep Dive / Viva Guide -->
+    <section id="viva-guide" class="container section">
+        <div class="section-header">
+            <h2>Technical <span>Deep Dive</span></h2>
+            <p>Comprehensive system concepts for your project presentation & viva.</p>
+        </div>
+        
+        <div class="split-layout" style="align-items: stretch;">
+            <div class="viva-block glass-panel">
+                <h3>🧠 Neural Network Model</h3>
+                <ul>
+                    <li><strong>Algorithm:</strong> Multi-Layer Perceptron Classifier (<code>MLPClassifier</code>).</li>
+                    <li><strong>Architecture:</strong> Two dense hidden layers containing <code>64</code> and <code>32</code> neurons respectively to decode non-linear patterns.</li>
+                    <li><strong>Data Pipeline:</strong> Features (Volatility, Trend, Volume) are rigorously scaled using <code>StandardScaler</code> after an 80/20 stratified split to prevent data leakage.</li>
+                    <li><strong>Training Optimization:</strong> Model solves iterations up to <code>1000</code> epochs, incorporating early stopping mechanisms to resist overfitting, and is validated using 5-Fold Cross Validation.</li>
+                </ul>
+            </div>
+            
+            <div class="viva-block glass-panel">
+                <h3>📚 Fuzzy Membership Engine</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Mamdani Inference translates the continuous NN score (0-10) into soft structural bounds.</p>
+                <ul>
+                    <li><strong>Low Risk:</strong> Trapezoidal boundary <code>[0, 0, 3, 5]</code></li>
+                    <li><strong>Medium Risk:</strong> Triangular boundary <code>[3, 5, 7]</code></li>
+                    <li><strong>High Risk:</strong> Trapezoidal boundary <code>[5, 7, 10, 10]</code></li>
+                </ul>
+                <img src="/static/img/membership.png" alt="Membership Graph" class="viva-graph">
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture / Flowchart Section -->
+    <section id="architecture" class="container section">
+        <div class="section-header">
+            <h2>Data <span>Architecture</span></h2>
+            <p>A visual breakdown of our real-time analytic pipeline.</p>
+        </div>
+        <div class="html-flowchart">
+            <div class="flow-step">
+                <div class="flow-icon">📊</div>
+                <h4>Market Data</h4>
+                <p>Volatility, Trend, Volume</p>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+                <div class="flow-icon">🧠</div>
+                <h4>Neural Network</h4>
+                <p>Pattern Recognition</p>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+                <div class="flow-icon">⚖️</div>
+                <h4>Fuzzy Logic</h4>
+                <p>Mamdani Inference</p>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step step-final">
+                <div class="flow-icon">🎯</div>
+                <h4>Risk Assessment</h4>
+                <p>Explainable Output</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="nav-brand">
+                <span class="logo-text">Neuro</span><span class="logo-highlight">Fuzzy</span>
+            </div>
+            <p>© 2026 AI Risk Systems. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

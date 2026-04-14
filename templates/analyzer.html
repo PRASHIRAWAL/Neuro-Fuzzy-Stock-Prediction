@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuro-Fuzzy Stock Risk Predictor</title>
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <a href="/" class="back-link">&larr; Back to Home</a>
+            <h1>Neuro-Fuzzy <span>Risk Predictor</span></h1>
+            <p>Predict stock market risk utilizing a hybrid neural-network and fuzzy logic engine.</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Left Side: Inputs -->
+            <section class="glass-panel input-section">
+                <h2>Market Indicators</h2>
+                <form id="prediction-form">
+                    <div class="input-group">
+                        <label for="volatility">Price Volatility</label>
+                        <input type="range" id="volatility" name="volatility" min="0" max="250" step="1" value="50">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+                            <span>Stable</span>
+                            <span id="volatility-val">50.0</span>
+                            <span>Wild</span>
+                        </div>
+                        <span class="tooltip">Select the current stability scale of the stock.</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="trend">Market Trend</label>
+                        <input type="range" id="trend" name="trend" min="-50" max="50" step="1" value="0">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+                            <span>Bearish</span>
+                            <span id="trend-val">0.0</span>
+                            <span>Bullish</span>
+                        </div>
+                        <span class="tooltip">Overall net movement direction.</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="volume">Trading Volume</label>
+                        <input type="range" id="volume" name="volume" min="0" max="1" step="0.05" value="0.5">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+                            <span>Quiet</span>
+                            <span id="volume-val">0.5</span>
+                            <span>Heavy</span>
+                        </div>
+                        <span class="tooltip">Market participation level.</span>
+                    </div>
+
+                    <button type="submit" class="btn-predict" id="btn-predict">
+                        <span class="btn-text">Compute Risk Score</span>
+                        <div class="loader" id="btn-loader" style="display:none;"></div>
+                    </button>
+                    <div id="error-message" class="error-msg"></div>
+                </form>
+            </section>
+
+            <!-- Right Side: Results -->
+            <section class="glass-panel result-section">
+                <h2>Prediction Result</h2>
+
+                <div class="result-placeholder" id="result-placeholder">
+                    <p>Enter data to compute risk</p>
+                </div>
+
+                <div class="results-content" id="results-content" style="display:none;">
+                    <div class="risk-badge" id="risk-badge">
+                        <span id="risk-text">High</span>
+                    </div>
+
+                    <div class="score-container">
+                        <div class="gauge-wrapper">
+                            <canvas id="gaugeChart"></canvas>
+                            <div class="gauge-overlay-text">
+                                <h3 id="continuous-score">0.0</h3>
+                                <span>Fuzzy Score</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <h4>Explainability</h4>
+                        <p id="explain-message">Volatility was the most significant factor (60% contribution) in this
+                            prediction.</p>
+
+                        <div class="contribution-bars">
+                            <div class="bar-row">
+                                <span>Volatility</span>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" id="bar-volatility"></div>
+                                </div>
+                            </div>
+                            <div class="bar-row">
+                                <span>Trend</span>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" id="bar-trend"></div>
+                                </div>
+                            </div>
+                            <div class="bar-row">
+                                <span>Volume</span>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" id="bar-volume"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fuzzy-params-box"
+                        style="margin-top: 2rem; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+                        <h4 style="color: #e2e8f0; margin-bottom: 1rem;">Fuzzy Logic Inference</h4>
+                        <img src="/static/img/membership.png" alt="Membership Functions"
+                            style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                        <ul style="list-style: none; color: #cbd5e1; font-size: 0.9rem; font-family: monospace;">
+                            <li style="margin-bottom: 0.5rem;">&#x2022; <strong>IF</strong> Neural Score is
+                                <strong>Low</strong> THEN Risk is <strong>Low</strong>
+                            </li>
+                            <li style="margin-bottom: 0.5rem;">&#x2022; <strong>IF</strong> Neural Score is
+                                <strong>Medium</strong> THEN Risk is <strong>Medium</strong>
+                            </li>
+                            <li>&#x2022; <strong>IF</strong> Neural Score is <strong>High</strong> THEN Risk is
+                                <strong>High</strong>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button id="btn-download-pdf" class="btn-predict"
+                            style="display: inline-block; width: auto; padding: 0.8rem 2rem; font-size: 1rem;">⬇
+                            Download PDF Report</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="glass-panel chart-section">
+            <div class="chart-header">
+                <h2>Model Analytics</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('probTab')">Neural Network Probability</button>
+                    <button class="tab" onclick="switchTab('cmTab')">Model Confusion Matrix</button>
+                </div>
+            </div>
+
+            <div id="probTab" class="tab-content active">
+                <canvas id="probabilityChart"></canvas>
+            </div>
+            <div id="cmTab" class="tab-content" style="display:none; text-align:center;">
+                <p>Training evaluation mapping for Neural Network precision:</p>
+                <img src="/static/img/confusion_matrix.png" alt="Confusion Matrix"
+                    onerror="this.src=''; this.alt='Confusion matrix will appear after training data.'"
+                    class="cm-image" />
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script src="/static/js/main.js"></script>
+
+    <div id="pdf-container" style="position:absolute; left:-9999px; top:0;"></div>
+
+
+</body>
+
+</html>
